@@ -23,6 +23,7 @@ import com.example.taf.taf_bm.model.SitUps;
 
 import org.angmarch.views.NiceSpinner;
 
+import java.text.DecimalFormat;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -84,6 +85,10 @@ public class SitupsAndMiles extends Fragment implements RadioGroup.OnCheckedChan
         gender = radio.getCheckedRadioButtonId();
         setTest();
         setUpInformation();
+        userWeight = weights.get(0);
+        userAge = ages.get(0);
+        time = minutes.get(0);
+        hr = heartRate.get(0);
 
         getActivity().setTitle("AFE Lesão Membros Sup. e Inf.");
 
@@ -156,8 +161,9 @@ public class SitupsAndMiles extends Fragment implements RadioGroup.OnCheckedChan
         }else{
             points+=(sitUp*2);
         }
+        DecimalFormat df = new DecimalFormat("#.00");
         String conceptR = concept.getConcept(points);
-        String results = ("VO2Máx: " + vo2  + "\n" +
+        String results = ("VO2Máx: " + df.format(aux)  + "\n" +
                 "Pontuação: " + points + "\n" +
                 "Conceito: " + conceptR + "\n" +
                 "Resultado: " + concept.getResult(conceptR));
