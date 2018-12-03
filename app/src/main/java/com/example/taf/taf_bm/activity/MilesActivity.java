@@ -134,7 +134,6 @@ public class MilesActivity extends Fragment implements RadioGroup.OnCheckedChang
                           "Resultado: " + concept.getResult(conceptR));
 
         setUp.dialog(results,getContext());
-        //setUp.refresh(MilesActivity.class, getArguments().getString("test"),getArguments().getInt("test_type", 1),getFragmentManager());
     }
 
 
