@@ -21,6 +21,7 @@ import com.example.taf.taf_bm.model.Miles;
 
 import org.angmarch.views.NiceSpinner;
 
+import java.text.DecimalFormat;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -76,9 +77,12 @@ public class MilesActivity extends Fragment implements RadioGroup.OnCheckedChang
 
         gender = 0;
         userGender = 2;
+        userWeight = weights.get(0);
+        userAge = ages.get(0);
+        time = minutes.get(0);
+        hr = heartRate.get(0);
 
         getActivity().setTitle(getArguments().getString("test"));
-
         return  view;
     }
 
@@ -101,8 +105,8 @@ public class MilesActivity extends Fragment implements RadioGroup.OnCheckedChang
     public void onClick(View v) {
         double libra = 2.20462262;
         double pc = userWeight * libra;
-        double aux =  (132.853 - (0.0796*pc) - (0.387*userAge) + (6.315*gender) - (3.2649*time) - (0.1565*hr));
-        int vo2 = (int) Math.ceil(aux);
+        double aux =  ((132.853 - (0.0796*pc)) - (0.387*userAge) + (6.315*gender) - (3.2649*time) - (0.1565*hr));
+        int vo2 = (int) Math.round(aux);
         if((userGender == 1) && (vo2 > 55)){
             points = 150;
         }else if((userGender == 2) && (vo2 > 51)){
@@ -125,8 +129,9 @@ public class MilesActivity extends Fragment implements RadioGroup.OnCheckedChang
             }
         }
         points+=150;
+        DecimalFormat df = new DecimalFormat("#.00");
         String conceptR = concept.getConcept(points);
-        String results = ("VO2Máx: " + vo2 + "\n" +
+        String results = ("VO2Máx: " + df.format(aux) + "\n" +
                           "Pontuação: " + points + "\n" +
                           "Conceito: " + conceptR + "\n" +
                           "Resultado: " + concept.getResult(conceptR));
