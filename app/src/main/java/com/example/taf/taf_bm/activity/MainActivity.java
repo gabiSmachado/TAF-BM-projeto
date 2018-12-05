@@ -194,7 +194,7 @@ public class MainActivity extends AppCompatActivity
 
                         DrawerLayout drawer = (DrawerLayout) findViewById(R.id.drawer_layout);
                         drawer.closeDrawer(GravityCompat.START);
-                        expandableListView.collapseGroup(groupPosition);
+                        //expandableListView.collapseGroup(groupPosition);
                         onBackPressed();
                     }
                 }
@@ -262,7 +262,7 @@ public class MainActivity extends AppCompatActivity
 
                     DrawerLayout drawer = (DrawerLayout) findViewById(R.id.drawer_layout);
                     drawer.closeDrawer(GravityCompat.START);
-                    expandableListView.collapseGroup(groupPosition);
+                    //expandableListView.collapseGroup(groupPosition);
                     onBackPressed();
                 }
                 return false;
