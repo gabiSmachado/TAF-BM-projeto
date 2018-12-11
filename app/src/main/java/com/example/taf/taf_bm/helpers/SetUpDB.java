@@ -55,12 +55,19 @@ public class SetUpDB {
     public void registerPullUp() {
         ArrayList<PullUps> pullUps = new ArrayList<>();
         int value = 5;
-        for (int i = 1; i < 13; i++) {
+        for (int i = 1; i < 11; i++) {
             pullUps.add(new PullUps(i, 1, Points.findById(Points.class, value),
                     Points.findById(Points.class, (value + 2)), Points.findById(Points.class, (value + 4)), Points.findById(Points.class, (value + 6)),
                     Points.findById(Points.class, (value+ 7))));
             value++;
         }
+        value = 14;
+        pullUps.add(new PullUps(11, 1, Points.findById(Points.class,14),
+                Points.findById(Points.class, (value + 2)), Points.findById(Points.class, (value + 4)), Points.findById(Points.class, (value + 6)),
+                Points.findById(Points.class, (value+ 7))));
+        pullUps.add(new PullUps(12, 1, Points.findById(Points.class, value),
+                Points.findById(Points.class, (value + 2)), Points.findById(Points.class, (value + 4)), Points.findById(Points.class, (value + 6)),
+                Points.findById(Points.class, (value+ 7))));
         facade.setPullUps(pullUps);
     }
 
