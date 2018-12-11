@@ -20,4 +20,8 @@ public class Concepts {
         }
         return "Apto";
     }
+
+    public int totalP (int points){
+       return (211-points);
+    }
 }

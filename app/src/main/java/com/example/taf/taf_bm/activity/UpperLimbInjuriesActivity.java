@@ -128,6 +128,9 @@ public class UpperLimbInjuriesActivity extends Fragment implements RadioGroup.On
         String results  = ("Pontuação: " + points + "\n" +
                            "Conceito: " + conceptR + "\n" +
                             "Resultado: " + concept.getResult(conceptR));
+        if (points < 211){
+            results+=("\n\n Falta " + concept.totalP(points) + " pontos para você atingir um resultado Apto.");
+        }
         setUp.dialog(results,getContext());
         //setUp.refresh(UpperLimbInjuriesActivity.class, getArguments().getString("test"),getArguments().getInt("test_type", 1),getFragmentManager());
     }

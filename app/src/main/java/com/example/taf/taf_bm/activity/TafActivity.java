@@ -177,6 +177,9 @@ public class TafActivity extends Fragment implements RadioGroup.OnCheckedChangeL
             results  = ("Pontuação: " + points + "\n" +
                               "Conceito: " + conceptR + "\n" +
                               "Resultado: " + concept.getResult(conceptR));
+            if (points < 211){
+                results+=("\n\nFalta " + concept.totalP(points) + " pontos para você atingir um resultado Apto.");
+            }
         }else if (userTest == 2){
             double resul = (points*10)/300;
             results  = ("Pontuação: " + points + "\n" +
