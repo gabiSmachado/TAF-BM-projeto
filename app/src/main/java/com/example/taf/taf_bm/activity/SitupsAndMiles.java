@@ -105,12 +105,14 @@ public class SitupsAndMiles extends Fragment implements RadioGroup.OnCheckedChan
         switch (gender){
             case R.id.man:
                 calGender = 1;
+                userGender=1;
                 sitUps = facade.findSitUps(1);
                 System.out.println(sitUps.get(0).getQuantity());
                 setUpInformation();
                 break;
             case R.id.woman:
                 calGender = 0;
+                userGender=2;
                 sitUps = facade.findSitUps(2);
                 setUpInformation();
                 break;
@@ -139,20 +141,19 @@ public class SitupsAndMiles extends Fragment implements RadioGroup.OnCheckedChan
         }else if((userGender == 2) && (vo2 > 51)){
             points = 150;
         }else {
-           // miles = facade.findMiles(userGender,(vo2));
+            miles = facade.findMiles(userGender);
+            int position = concept.miles(vo2,userGender);
             if(miles.size() != 0) {
                 if (userAge <= 27)
-                    points = miles.get(0).getTwentySeven().getValue();
+                    points = miles.get(position).getTwentySeven().getValue();
                 else if (userAge >= 28 && userAge <= 35)
-                    points = miles.get(0).getThirtyFive().getValue();
+                    points = miles.get(position).getThirtyFive().getValue();
                 else if (userAge >= 36 && userAge <= 44)
-                    points = miles.get(0).getFortyFour().getValue();
+                    points = miles.get(position).getFortyFour().getValue();
                 else if (userAge >= 45 && userAge <= 50)
-                    points = miles.get(0).getFifteen().getValue();
+                    points = miles.get(position).getFifteen().getValue();
                 else if (userAge > 50)
-                    points = miles.get(0).getMoreFifteen().getValue();
-            }else{
-                points = 0;
+                    points = miles.get(position).getMoreFifteen().getValue();
             }
         }
         int sitUp = Integer.valueOf(sitUpPoints.getText().toString());
@@ -168,7 +169,11 @@ public class SitupsAndMiles extends Fragment implements RadioGroup.OnCheckedChan
                 "Conceito: " + conceptR + "\n" +
                 "Resultado: " + concept.getResult(conceptR));
 
+        if (points < 211){
+            results+=("\n\nFalta " + concept.totalP(points) + " pontos para você atingir um resultado Apto.");
+        }
         setUp.dialog(results,getContext());
+        points = 0;
         //setUp.refresh(SitupsAndMiles.class, getArguments().getString("test"),getArguments().getInt("test_type", 1),getFragmentManager());
     }
 

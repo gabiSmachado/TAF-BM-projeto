@@ -104,7 +104,7 @@ public class MilesActivity extends Fragment implements RadioGroup.OnCheckedChang
         double libra = 2.20462262;
         double pc = userWeight * libra;
         double aux =  ((132.853 - (0.0796*pc)) - (0.387*userAge) + (6.315*gender) - (3.2649*time) - (0.1565*hr));
-        int vo2 = (int) Math.round(aux);
+        int vo2 = (int) Math.floor(aux);
         if((userGender == 1) && (vo2 > 55)){
             points = 150;
         }else if((userGender == 2) && (vo2 > 51)){
@@ -132,7 +132,9 @@ public class MilesActivity extends Fragment implements RadioGroup.OnCheckedChang
                           "Pontuação: " + points + "\n" +
                           "Conceito: " + conceptR + "\n" +
                           "Resultado: " + concept.getResult(conceptR));
-
+        if (points < 211){
+            results+=("\n\nFalta " + concept.totalP(points) + " pontos para você atingir um resultado Apto.");
+        }
         setUp.dialog(results,getContext());
         points = 0;
     }

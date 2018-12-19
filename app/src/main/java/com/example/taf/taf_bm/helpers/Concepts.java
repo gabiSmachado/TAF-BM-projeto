@@ -35,16 +35,16 @@ public class Concepts {
        List<Miles> miles = facade.findMiles(gender);
         if (gender == 1){
             for (int i=0; i<miles.size();i++){
-                if (vo2 <= (-16) || (vo2 < 17)){
+                if (vo2 <= (-16) && (vo2 < 17)){
                     if (miles.get(i).getQuantity() == -16)
                     return i;
-                }else if ((vo2 >20) || (vo2 <23 )){
+                }else if ((vo2 >20) && (vo2 <23 )){
                     if (miles.get(i).getQuantity() == 20)
                         return i;
-                }else if ((vo2 >23) || (vo2 <26 )){
+                }else if ((vo2 >23) && (vo2 <26 )){
                     if (miles.get(i).getQuantity() == 23)
                         return i;
-                }else if ((vo2 >28) || (vo2 <30 )){
+                }else if ((vo2 >28) && (vo2 <30 )){
                     if (miles.get(i).getQuantity() == 28)
                         return i;
                 }
@@ -52,10 +52,10 @@ public class Concepts {
 
         }else if(gender == 2){
             for (int i=0; i<miles.size();i++){
-                if (vo2 <= (-13) || (vo2 < 14)){
+                if (vo2 <= (-13) && (vo2 < 14)){
                     if (miles.get(i).getQuantity() == -13)
                         return i;
-                }else if ((vo2 >20) || (vo2 < 25 )){
+                }else if ((vo2 >20) && (vo2 < 25 )){
                     if (miles.get(i).getQuantity() == 20)
                         return i;
                 }

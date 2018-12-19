@@ -119,6 +119,7 @@ public class LowerLimbInjuriesActivity extends Fragment implements RadioGroup.On
                     pushUps = facade.findPushUps(1);
                 }
                 calGender = 1;
+                userGender = 1;
                 sitUps = facade.findSitUps(1);
                 System.out.println(sitUps.get(0).getQuantity());
                 setUpInformation();
@@ -127,6 +128,7 @@ public class LowerLimbInjuriesActivity extends Fragment implements RadioGroup.On
                 testName.setText("Apoio:");
                 pushUps = facade.findPushUps(2);
                 calGender = 0;
+                userGender = 2;
                 sitUps = facade.findSitUps(2);
                 setUpInformation();
                 break;
@@ -164,30 +166,29 @@ public class LowerLimbInjuriesActivity extends Fragment implements RadioGroup.On
         double libra = 2.20462262;
         double pc = userWeight * libra;
         double aux = (132.853 - (0.0796*pc) - (0.387*userAge) + (6.315*calGender) - (3.2649*time) - (0.1565*hr));
-        int vo2 = (int) Math.ceil(aux);
-
+        int vo2 = (int) Math.floor(aux);
         if((userGender == 1) && (vo2 > 55)){
             points = 150;
+            System.out.println(points);
         }else if((userGender == 2) && (vo2 > 51)){
             points = 150;
         }else {
-            //miles = facade.findMiles(userGender,(vo2));
+            miles = facade.findMiles(userGender);
+            int position = concept.miles(vo2,userGender);
             if(miles.size() != 0) {
                 if (userAge <= 27)
-                    points = miles.get(0).getTwentySeven().getValue();
+                    points = miles.get(position).getTwentySeven().getValue();
                 else if (userAge >= 28 && userAge <= 35)
-                    points = miles.get(0).getThirtyFive().getValue();
+                    points = miles.get(position).getThirtyFive().getValue();
                 else if (userAge >= 36 && userAge <= 44)
-                    points = miles.get(0).getFortyFour().getValue();
+                    points = miles.get(position).getFortyFour().getValue();
                 else if (userAge >= 45 && userAge <= 50)
-                    points = miles.get(0).getFifteen().getValue();
+                    points = miles.get(position).getFifteen().getValue();
                 else if (userAge > 50)
-                    points = miles.get(0).getMoreFifteen().getValue();
-            }else{
-                points = 0;
+                    points = miles.get(position).getMoreFifteen().getValue();
             }
         }
-        System.out.println(points);
+
         int test = Integer.valueOf(testPoints.getText().toString());
         int sitUp = Integer.valueOf(sitUpPoints.getText().toString());
         if ((test == 0) || (sitUp == 0)){
@@ -195,14 +196,18 @@ public class LowerLimbInjuriesActivity extends Fragment implements RadioGroup.On
         }else{
             points+=(test + sitUp);
         }
+
         DecimalFormat df = new DecimalFormat("#.00");
         String conceptR = concept.getConcept(points);
         String results = ("VO2Máx: " + df.format(aux) + "\n" +
                 "Pontuação: " + points + "\n" +
                 "Conceito: " + conceptR + "\n" +
                 "Resultado: " + concept.getResult(conceptR));
-
+        if (points < 211){
+            results+=("\n\nFalta " + concept.totalP(points) + " pontos para você atingir um resultado Apto.");
+        }
         setUp.dialog(results,getContext());
+        points = 0;
         //setUp.refresh(LowerLimbInjuriesActivity.class, getArguments().getString("test"),getArguments().getInt("test_type", 1),getFragmentManager());
     }
 
