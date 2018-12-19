@@ -71,6 +71,7 @@ public class MilesActivity extends Fragment implements RadioGroup.OnCheckedChang
         rate.addOnItemClickListener(this);
         min.addOnItemClickListener(this);
         sec.addOnItemClickListener(this);
+        spinnerAge.addOnItemClickListener(this);
 
         gender = 0;
         userGender = 2;
@@ -109,20 +110,19 @@ public class MilesActivity extends Fragment implements RadioGroup.OnCheckedChang
         }else if((userGender == 2) && (vo2 > 51)){
             points = 150;
         }else {
-            miles = facade.findMiles(userGender,(vo2));
+            miles = facade.findMiles(userGender);
+            int position = concept.miles(vo2,userGender);
             if(miles.size() != 0) {
                 if (userAge <= 27)
-                    points = miles.get(0).getTwentySeven().getValue();
+                    points = miles.get(position).getTwentySeven().getValue();
                 else if (userAge >= 28 && userAge <= 35)
-                    points = miles.get(0).getThirtyFive().getValue();
+                    points = miles.get(position).getThirtyFive().getValue();
                 else if (userAge >= 36 && userAge <= 44)
-                    points = miles.get(0).getFortyFour().getValue();
+                    points = miles.get(position).getFortyFour().getValue();
                 else if (userAge >= 45 && userAge <= 50)
-                    points = miles.get(0).getFifteen().getValue();
+                    points = miles.get(position).getFifteen().getValue();
                 else if (userAge > 50)
-                    points = miles.get(0).getMoreFifteen().getValue();
-            }else{
-                points = 0;
+                    points = miles.get(position).getMoreFifteen().getValue();
             }
         }
         points+=150;
@@ -134,6 +134,7 @@ public class MilesActivity extends Fragment implements RadioGroup.OnCheckedChang
                           "Resultado: " + concept.getResult(conceptR));
 
         setUp.dialog(results,getContext());
+        points = 0;
     }
 
 
@@ -164,6 +165,7 @@ public class MilesActivity extends Fragment implements RadioGroup.OnCheckedChang
                 break;
             case R.id.age:
                 userAge = ages.get(position);
+                System.out.println(userAge);
                 break;
         }
     }

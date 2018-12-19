@@ -17,7 +17,7 @@ public class ControllerMiles {
         return Miles.listAll(Miles.class);
     }
 
-    public List<Miles> select(int gender,int quantity){
-        return Miles.find(Miles.class, "gender = ? and quantity = ?", String.valueOf(gender), String.valueOf(quantity));
+    public List<Miles> select(int gender){
+        return Miles.find(Miles.class, "gender = ?", String.valueOf(gender));
     }
 }

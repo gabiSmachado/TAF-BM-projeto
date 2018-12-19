@@ -69,5 +69,5 @@ public class Facade {
         controllerMiles.save(miles);
     }
     public List<Miles> getMiles(){return controllerMiles.read();}
-    public List<Miles> findMiles(int gender, int quantity){return controllerMiles.select(gender,quantity);}
+    public List<Miles> findMiles(int gender){return controllerMiles.select(gender);}
 }

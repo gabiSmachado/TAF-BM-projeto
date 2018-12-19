@@ -286,7 +286,7 @@ public class SetUpDB {
 
     public void registerMiles() {
         ArrayList<Miles> miles = new ArrayList<>();
-        int value = 1200;
+        int value = -16;
         int gender = 1;
         int aux = 33;
         for (int i = 0; i < 2; i++) {

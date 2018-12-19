@@ -139,7 +139,7 @@ public class SitupsAndMiles extends Fragment implements RadioGroup.OnCheckedChan
         }else if((userGender == 2) && (vo2 > 51)){
             points = 150;
         }else {
-            miles = facade.findMiles(userGender,(vo2));
+           // miles = facade.findMiles(userGender,(vo2));
             if(miles.size() != 0) {
                 if (userAge <= 27)
                     points = miles.get(0).getTwentySeven().getValue();
