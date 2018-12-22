@@ -16,6 +16,7 @@ import android.widget.TextView;
 
 import com.example.taf.taf_bm.R;
 import com.example.taf.taf_bm.helpers.ExpandableListAdapter;
+import com.example.taf.taf_bm.helpers.OnBackPressedListener;
 import com.example.taf.taf_bm.model.MenuModel;
 
 import java.util.ArrayList;
@@ -28,7 +29,7 @@ public class MainActivity extends AppCompatActivity
     ExpandableListView expandableListView;
     List<MenuModel> headerList = new ArrayList<>();
     HashMap<MenuModel, List<MenuModel>> childList = new HashMap<>();
-
+    protected OnBackPressedListener onBackPressedListener;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -62,9 +63,12 @@ public class MainActivity extends AppCompatActivity
         DrawerLayout drawer = (DrawerLayout) findViewById(R.id.drawer_layout);
         if (drawer.isDrawerOpen(GravityCompat.START)) {
             drawer.closeDrawer(GravityCompat.START);
+        } else if (onBackPressedListener != null){
+            onBackPressedListener.doBack();
         } else {
             super.onBackPressed();
         }
+
     }
 
     @SuppressWarnings("StatementWithEmptyBody")
@@ -268,6 +272,9 @@ public class MainActivity extends AppCompatActivity
                 return false;
             }
         });
+    }
+    public void setOnBackPressedListener(OnBackPressedListener onBackPressedListener) {
+        this.onBackPressedListener = onBackPressedListener;
     }
 }
 

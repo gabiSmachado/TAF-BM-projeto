@@ -4,6 +4,7 @@ package com.example.taf.taf_bm.activity;
 import android.os.Bundle;
 import android.support.annotation.Nullable;
 import android.support.v4.app.Fragment;
+import android.support.v4.app.FragmentActivity;
 import android.support.v4.app.FragmentTransaction;
 import android.util.Log;
 import android.view.LayoutInflater;
@@ -16,6 +17,7 @@ import android.widget.Toast;
 
 import com.example.taf.taf_bm.R;
 import com.example.taf.taf_bm.facade.Facade;
+import com.example.taf.taf_bm.helpers.BaseBackPressedListener;
 import com.example.taf.taf_bm.helpers.Concepts;
 import com.example.taf.taf_bm.helpers.MyOnItemSelectedListener;
 import com.example.taf.taf_bm.helpers.SetUpViews;
@@ -29,7 +31,8 @@ import org.angmarch.views.NiceSpinner;
 import java.util.ArrayList;
 import java.util.List;
 
-public class TafActivity extends Fragment implements RadioGroup.OnCheckedChangeListener,View.OnClickListener,AdapterView.OnItemSelectedListener{
+public class TafActivity extends Fragment implements RadioGroup.OnCheckedChangeListener,View.OnClickListener,
+        AdapterView.OnItemSelectedListener{
     private NiceSpinner spinnerTest, spinnerSitUp,spinnerRunning,spinnerAge;
     private Facade facade;
     private List<PullUps> pullUps;
@@ -43,12 +46,15 @@ public class TafActivity extends Fragment implements RadioGroup.OnCheckedChangeL
     private Concepts concept;
     private  RadioGroup radio;
     private ArrayList<Integer> ages;
-
+    private FragmentActivity activity;
     @Override
     public View onCreateView(LayoutInflater inflater, @Nullable ViewGroup container, Bundle savedInstanceState) {
         if (savedInstanceState != null){
             super.onActivityCreated(savedInstanceState);
         }
+
+        activity = getActivity();
+        ((MainActivity)activity).setOnBackPressedListener(new BaseBackPressedListener(activity));
 
         View view = inflater.inflate(R.layout.activity_taf, container, false);
         testName = view.findViewById(R.id.test);
@@ -199,5 +205,4 @@ public class TafActivity extends Fragment implements RadioGroup.OnCheckedChangeL
     public void onSaveInstanceState(Bundle outState) {
         super.onSaveInstanceState(outState);
     }
-
 }
