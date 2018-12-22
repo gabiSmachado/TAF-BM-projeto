@@ -41,9 +41,13 @@ public class SitupsAndMiles extends Fragment implements RadioGroup.OnCheckedChan
     private List<SitUps> sitUps;
     private ArrayList<Integer> ages;
 
-    @Nullable
+
     @Override
-    public View onCreateView(LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
+    public View onCreateView(LayoutInflater inflater, @Nullable ViewGroup container, Bundle savedInstanceState) {
+        if (savedInstanceState != null){
+            super.onActivityCreated(savedInstanceState);
+        }
+
         View view = inflater.inflate(R.layout.activity_sit_ups_and_miles, container, false);
 
         facade = Facade.getInstance();
@@ -212,5 +216,10 @@ public class SitupsAndMiles extends Fragment implements RadioGroup.OnCheckedChan
     @Override
     public void onNothingSelected(AdapterView<?> parent) {
 
+    }
+
+    @Override
+    public void onSaveInstanceState(Bundle outState) {
+        super.onSaveInstanceState(outState);
     }
 }

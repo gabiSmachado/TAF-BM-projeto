@@ -15,9 +15,8 @@ import com.example.taf.taf_bm.R;
 public class InformationActivity extends Fragment {
 
 
-    @Nullable
     @Override
-    public View onCreateView(LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
+    public View onCreateView(LayoutInflater inflater, @Nullable ViewGroup container, Bundle savedInstanceState) {
         View view = inflater.inflate(R.layout.information, container, false);
         getActivity().setTitle("Sobre");
         TextView t = view.findViewById(R.id.title);
@@ -44,5 +43,10 @@ public class InformationActivity extends Fragment {
         super.onViewCreated(view, savedInstanceState);
         //you can set the title for your toolbar here for different fragments different titles
         //getActivity().setTitle("");
+    }
+
+    @Override
+    public void onSaveInstanceState(Bundle outState) {
+        super.onSaveInstanceState(outState);
     }
 }

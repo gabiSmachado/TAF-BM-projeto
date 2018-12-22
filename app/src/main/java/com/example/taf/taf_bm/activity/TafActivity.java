@@ -5,12 +5,14 @@ import android.os.Bundle;
 import android.support.annotation.Nullable;
 import android.support.v4.app.Fragment;
 import android.support.v4.app.FragmentTransaction;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.AdapterView;
 import android.widget.RadioGroup;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import com.example.taf.taf_bm.R;
 import com.example.taf.taf_bm.facade.Facade;
@@ -27,7 +29,7 @@ import org.angmarch.views.NiceSpinner;
 import java.util.ArrayList;
 import java.util.List;
 
-public class TafActivity extends Fragment implements RadioGroup.OnCheckedChangeListener,View.OnClickListener,AdapterView.OnItemSelectedListener {
+public class TafActivity extends Fragment implements RadioGroup.OnCheckedChangeListener,View.OnClickListener,AdapterView.OnItemSelectedListener{
     private NiceSpinner spinnerTest, spinnerSitUp,spinnerRunning,spinnerAge;
     private Facade facade;
     private List<PullUps> pullUps;
@@ -42,9 +44,12 @@ public class TafActivity extends Fragment implements RadioGroup.OnCheckedChangeL
     private  RadioGroup radio;
     private ArrayList<Integer> ages;
 
-    @Nullable
     @Override
-    public View onCreateView(LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
+    public View onCreateView(LayoutInflater inflater, @Nullable ViewGroup container, Bundle savedInstanceState) {
+        if (savedInstanceState != null){
+            super.onActivityCreated(savedInstanceState);
+        }
+
         View view = inflater.inflate(R.layout.activity_taf, container, false);
         testName = view.findViewById(R.id.test);
 
@@ -187,6 +192,12 @@ public class TafActivity extends Fragment implements RadioGroup.OnCheckedChangeL
         }
         setUp.dialog(results,getContext());
         //setUp.refresh(TafActivity.class, getArguments().getString("test"),getArguments().getInt("test_type", 1),getFragmentManager());
+    }
+
+
+    @Override
+    public void onSaveInstanceState(Bundle outState) {
+        super.onSaveInstanceState(outState);
     }
 
 }

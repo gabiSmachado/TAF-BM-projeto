@@ -45,9 +45,11 @@ public class LowerLimbInjuriesActivity extends Fragment implements RadioGroup.On
     private List<PullUps> pullUps;
     private List<PushUps> pushUps;
 
-    @Nullable
     @Override
-    public View onCreateView(LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
+    public View onCreateView(LayoutInflater inflater, @Nullable ViewGroup container, Bundle savedInstanceState) {
+        if (savedInstanceState != null){
+            super.onActivityCreated(savedInstanceState);
+        }
         View view = inflater.inflate(R.layout.activity_lower_limb_injuries, container, false);
 
         facade = Facade.getInstance();
@@ -246,5 +248,10 @@ public class LowerLimbInjuriesActivity extends Fragment implements RadioGroup.On
     @Override
     public void onNothingSelected(AdapterView<?> parent) {
 
+    }
+
+    @Override
+    public void onSaveInstanceState(Bundle outState) {
+        super.onSaveInstanceState(outState);
     }
 }

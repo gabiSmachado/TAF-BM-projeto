@@ -34,9 +34,11 @@ public class MilesActivity extends Fragment implements RadioGroup.OnCheckedChang
     private double time;
     private ArrayList<Integer> ages;
 
-    @Nullable
     @Override
-    public View onCreateView(LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
+    public View onCreateView(LayoutInflater inflater, @Nullable ViewGroup container, Bundle savedInstanceState) {
+        if (savedInstanceState != null){
+            super.onActivityCreated(savedInstanceState);
+        }
         View view = inflater.inflate(R.layout.activity_miles, container, false);
 
         facade = Facade.getInstance();
@@ -170,5 +172,10 @@ public class MilesActivity extends Fragment implements RadioGroup.OnCheckedChang
                 System.out.println(userAge);
                 break;
         }
+    }
+
+    @Override
+    public void onSaveInstanceState(Bundle outState) {
+        super.onSaveInstanceState(outState);
     }
 }

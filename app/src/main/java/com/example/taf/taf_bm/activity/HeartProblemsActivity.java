@@ -14,9 +14,12 @@ import com.example.taf.taf_bm.R;
 
 public class HeartProblemsActivity extends Fragment {
 
-    @Nullable
+
     @Override
-    public View onCreateView(LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
+    public View onCreateView(LayoutInflater inflater, @Nullable ViewGroup container, Bundle savedInstanceState) {
+        if (savedInstanceState != null){
+            super.onActivityCreated(savedInstanceState);
+        }
         View view = inflater.inflate(R.layout.activity_heart_problems, container, false);
 
         TextView text = view.findViewById(R.id.description);
@@ -26,5 +29,10 @@ public class HeartProblemsActivity extends Fragment {
         getActivity().setTitle("Problemas Cardiacos");
 
         return view;
+    }
+
+    @Override
+    public void onSaveInstanceState(Bundle outState) {
+        super.onSaveInstanceState(outState);
     }
 }

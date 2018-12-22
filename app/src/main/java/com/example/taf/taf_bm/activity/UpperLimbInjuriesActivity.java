@@ -145,4 +145,14 @@ public class UpperLimbInjuriesActivity extends Fragment implements RadioGroup.On
     public void onNothingSelected(AdapterView<?> parent) {
 
     }
+
+    @Override
+    public void onViewStateRestored(Bundle savedInstanceState) {
+        super.onViewStateRestored(savedInstanceState);
+    }
+
+    @Override
+    public void onSaveInstanceState(Bundle outState) {
+        super.onSaveInstanceState(outState);
+    }
 }
