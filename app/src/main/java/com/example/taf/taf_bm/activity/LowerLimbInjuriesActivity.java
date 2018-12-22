@@ -4,6 +4,7 @@ import android.content.Intent;
 import android.os.Bundle;
 import android.support.annotation.Nullable;
 import android.support.v4.app.Fragment;
+import android.support.v4.app.FragmentActivity;
 import android.support.v4.app.FragmentTransaction;
 import android.support.v7.app.AlertDialog;
 import android.view.LayoutInflater;
@@ -15,6 +16,7 @@ import android.widget.TextView;
 
 import com.example.taf.taf_bm.R;
 import com.example.taf.taf_bm.facade.Facade;
+import com.example.taf.taf_bm.helpers.BaseBackPressedListener;
 import com.example.taf.taf_bm.helpers.Concepts;
 import com.example.taf.taf_bm.helpers.MyOnItemSelectedListener;
 import com.example.taf.taf_bm.helpers.SetUpViews;
@@ -44,12 +46,15 @@ public class LowerLimbInjuriesActivity extends Fragment implements RadioGroup.On
     private ArrayList<Integer> ages;
     private List<PullUps> pullUps;
     private List<PushUps> pushUps;
-
+    private FragmentActivity activity;
     @Override
     public View onCreateView(LayoutInflater inflater, @Nullable ViewGroup container, Bundle savedInstanceState) {
         if (savedInstanceState != null){
             super.onActivityCreated(savedInstanceState);
         }
+        activity = getActivity();
+        ((MainActivity)activity).setOnBackPressedListener(new BaseBackPressedListener(activity));
+
         View view = inflater.inflate(R.layout.activity_lower_limb_injuries, container, false);
 
         facade = Facade.getInstance();

@@ -4,6 +4,7 @@ package com.example.taf.taf_bm.activity;
 import android.os.Bundle;
 import android.support.annotation.Nullable;
 import android.support.v4.app.Fragment;
+import android.support.v4.app.FragmentActivity;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -12,6 +13,7 @@ import android.widget.RadioGroup;
 
 import com.example.taf.taf_bm.R;
 import com.example.taf.taf_bm.facade.Facade;
+import com.example.taf.taf_bm.helpers.BaseBackPressedListener;
 import com.example.taf.taf_bm.helpers.Concepts;
 import com.example.taf.taf_bm.helpers.SetUpViews;
 import com.example.taf.taf_bm.model.Miles;
@@ -33,12 +35,15 @@ public class MilesActivity extends Fragment implements RadioGroup.OnCheckedChang
     private List<Miles> miles;
     private double time;
     private ArrayList<Integer> ages;
-
+    private FragmentActivity activity;
     @Override
     public View onCreateView(LayoutInflater inflater, @Nullable ViewGroup container, Bundle savedInstanceState) {
         if (savedInstanceState != null){
             super.onActivityCreated(savedInstanceState);
         }
+
+        activity = getActivity();
+        ((MainActivity)activity).setOnBackPressedListener(new BaseBackPressedListener(activity));
         View view = inflater.inflate(R.layout.activity_miles, container, false);
 
         facade = Facade.getInstance();
